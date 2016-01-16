@@ -29,10 +29,10 @@ var GameWelcomeLayer = cc.Layer.extend({
     // 实现菜单的回调方法
     menuCallBack:function(sender){
     	// 播放单击按钮的音效
-        cc.audioEngine.playEffect(EFFECT_BUTTON_CHICK);
+        //cc.audioEngine.playEffect(EFFECT_BUTTON_CHICK);
         
         // 设置游戏模式
-        gGameMode = eGameMode.Challenge;
+        gGameMode = eGameMode.Timer;
         //gGameMode = eGameMode.Timer;
         
         // 创建游戏主界面对象
@@ -42,7 +42,7 @@ var GameWelcomeLayer = cc.Layer.extend({
         nextScene.addChild(nextLayer);
         
         // 切换到游戏主视图界面
-        cc.director.runScene(new cc.TransitionRotoZoom(1, nextScene));	// 从上到下切换场景
+        cc.director.runScene(new cc.TransitionFade(1, nextScene));	// 从上到下切换场景
     }
 });
 

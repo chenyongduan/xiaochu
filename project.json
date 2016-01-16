@@ -13,12 +13,10 @@
 
     "jsList" : [
         "src/resource.js",
-        "src/myApp.js",
-        "src/GameDataDefine.js",
-        "src/GameLoadingLayer.js",
         "src/GameWelcomeLayer.js",
         "src/GamePattern.js",
         "src/GamePatternMatrix.js",
-        "src/GameResultLayer.js"
+        "src/GameResultLayer.js",
+        "src/GameDataDefine.js"
     ]
 }

@@ -38,7 +38,11 @@ var res = {
     DaojuFuyi:"res/daoju/fuyi.png",
     DaojuHuoqiu:"res/daoju/huoqiu.png",
     DaojuQuanzhang:"res/daoju/quanzhang.png",
-    DaojuXiongzhen:"res/daoju/xiongzhen.png"
+    DaojuXiongzhen:"res/daoju/xiongzhen.png",
+    ResultBtnRestart1:"res/result/btnResultRestart.png",
+    ResultBtnRestart2:"res/result/btnResultRestartDown.png",
+    ResultStar:"res/result/star.png",
+    YansuXuanzhong:"res/yuansu/select.png"
 };
 
 var g_resources = [];

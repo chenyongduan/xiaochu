@@ -8,7 +8,7 @@ var eGameResultMenuTag = {
 
 var SCORE_MAX = 9999999;
 
-var GameResultLayer = cc.Layer.extend({
+var GameResultLayer = cc.LayerColor.extend({
     mGameScore:0,
     mStarScores:null,
     mIsSucceed:true,
@@ -16,24 +16,23 @@ var GameResultLayer = cc.Layer.extend({
     mStarSprites:null,
 
     init:function () {
-    
-    	this._super();
-    	
+    	this._super(cc.color(0,0,0,128));
+
         this.mStarSprites = [];
 		
         var size = cc.director.getWinSize();
-        
+
         // 添加重新开始菜单
-        var itemRestart =cc.MenuItemImage.create("resultLayer/btnResultRestart.png", "resultLayer/btnResultRestartDown.png", this.menuCallBack, this);
+        var itemRestart =cc.MenuItemImage.create(res.ResultBtnRestart1, res.ResultBtnRestart2, this.menuCallBack, this);
         itemRestart.setTag(eGameResultMenuTag.Restart);
         itemRestart.setPosition(size.width / 2, size.height / 10 * 3.5);
 
         var resultMenu = cc.Menu.create(itemRestart);
         resultMenu.setPosition(0,0);
+        resultMenu.setScale(1.2);
         this.addChild(resultMenu);
     },
     initResultData:function( gameScore, referenceScore, recordScore, isSucceed){
-        var bRet = true;
         if(gameScore > SCORE_MAX)
             gameScore = SCORE_MAX;
         else if(gameScore < 0)
@@ -41,29 +40,16 @@ var GameResultLayer = cc.Layer.extend({
 
         this.mGameScore = gameScore;
 
-        this.mStarScores = [0,0,0];
-        if(referenceScore > 0 && referenceScore<=SCORE_MAX){
-            this.mStarScores[0] = gameScore*0.4;
-            this.mStarScores[1] = gameScore*0.6;
-            this.mStarScores[2] = gameScore*0.8;
-        }
-        else
-            bRet = false;
-
         this.mIsSucceed = isSucceed;
 
         for (var starIndex=0; starIndex<3; starIndex++){
-            if (this.mStarSprites[starIndex] == null && this.mGameScore > this.mStarScores[starIndex]){
                 this.showStar(starIndex);
-            }
         }
-        if (bRet == false)
-            cc.log("GameResult Error");
     },
     showStar:function(starIndex){
     	var size = cc.director.getWinSize();
     	
-        this.mStarSprites[starIndex] = cc.Sprite.create("resultLayer/star.png");
+        this.mStarSprites[starIndex] = cc.Sprite.create(res.ResultStar);
         this.mStarSprites[starIndex].setScale(0.1);
 
         switch(starIndex){
@@ -83,7 +69,6 @@ var GameResultLayer = cc.Layer.extend({
         this.mStarSprites[starIndex].runAction(cc.RotateBy.create(0.7,720.0));
     },
     menuCallBack:function(sender){
-        cc.audioEngine.playEffect(EFFECT_BUTTON_CHICK);
         if (this.mIgnoreTouch == false){
             this.mIgnoreTouch = true;
             switch(sender.getTag()){
@@ -94,8 +79,7 @@ var GameResultLayer = cc.Layer.extend({
                     nextScene.addChild(nextLayer);
                     var matrixLayer = cc.director.getRunningScene().getChildByTag(111);
                     matrixLayer.clearMsgListener();
-                    //cc.Director.getInstance().replaceScene(cc.TransitionSlideInT.create(0.4, nextScene));
-                    cc.director.runScene(new cc.TransitionFade(1.2, nextScene));
+                    cc.director.runScene(new cc.TransitionFade(1, nextScene));
                     break;
             }
         }

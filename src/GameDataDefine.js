@@ -1,13 +1,9 @@
-//var gNotification = cc.NotificationCenter.getInstance();
-//var gSpriteFrameCache = cc.SpriteFrameCache.getInstance();		// 使用cc.spriteFrameCache
-//var gSharedEngine = cc.SimpleAudioEngine.getInstance();			// 使用cc.audioEngine
-
 var eGameMode = {
-    Invalid : -1,
     Challenge:0,
     Timer:1,
     Count:2
 };
+
 var gGameMode = eGameMode.Challenge;
 
 var gScoreData = {lastScore:0,bestScore:0};
